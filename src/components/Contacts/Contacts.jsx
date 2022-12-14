@@ -1,11 +1,9 @@
-// import PropTypes from 'prop-types';
 import { ContactItem } from '../ContactItem/ContactItem';
 import { nanoid } from 'nanoid';
 import { StyledUL } from './Contacts.styled';
 import { useSelector } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
 
-// { contacts, onDelete }
 export const Contacts = () => {
   const contacts = useSelector(getContacts);
   const filterValue = useSelector(getFilter);
@@ -21,27 +19,10 @@ export const Contacts = () => {
       {contacts.length && (
         <StyledUL>
           {filteredContacts().map(({ name, number }) => {
-            return (
-              <ContactItem
-                key={nanoid()}
-                name={name}
-                number={number}
-                // onDelete={onDelete}
-              />
-            );
+            return <ContactItem key={nanoid()} name={name} number={number} />;
           })}
         </StyledUL>
       )}
     </>
   );
 };
-
-// Contacts.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     }).isRequired
-//   ),
-//   onDelete: PropTypes.func.isRequired,
-// };

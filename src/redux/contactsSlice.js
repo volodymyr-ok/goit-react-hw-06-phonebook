@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-// const CONTACTS_KEY = `saved_contacts`;
-const LS_CS_KEY = `contacts_list`;
+const LS_CL_KEY = `contacts_list`;
 
 const initialContactsState = () => {
-  const savedContacts = localStorage.getItem(LS_CS_KEY);
+  const savedContacts = localStorage.getItem(LS_CL_KEY);
   if (!savedContacts) {
     return [];
   }
@@ -11,9 +10,7 @@ const initialContactsState = () => {
 };
 
 const setContactsInStorage = data =>
-  localStorage.setItem(LS_CS_KEY, JSON.stringify(data));
-const getContactsFromStorage = localStorage.getItem(LS_CS_KEY);
-console.log(getContactsFromStorage);
+  localStorage.setItem(LS_CL_KEY, JSON.stringify(data));
 
 const contactsSlice = createSlice({
   name: 'contacts',
