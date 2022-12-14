@@ -16,7 +16,7 @@ export const Contacts = () => {
 
   return (
     <>
-      {contacts.length && (
+      {contacts.length !== 0 && (
         <StyledUL>
           {filteredContacts().map(({ name, number }) => {
             return <ContactItem key={nanoid()} name={name} number={number} />;
