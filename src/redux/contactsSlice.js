@@ -1,16 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
-const CONTACTS_KEY = `saved_contacts`;
+// const CONTACTS_KEY = `saved_contacts`;
+const LS_CS_KEY = `contacts_list`;
 
 const initialContactsState = () => {
-  const savedContacts = localStorage.getItem(CONTACTS_KEY);
+  const savedContacts = localStorage.getItem(LS_CS_KEY);
   if (!savedContacts) {
     return [];
   }
   return JSON.parse(savedContacts);
 };
 
-const setInStorage = data =>
-  localStorage.setItem(CONTACTS_KEY, JSON.stringify(data));
+const setContactsInStorage = data =>
+  localStorage.setItem(LS_CS_KEY, JSON.stringify(data));
+const getContactsFromStorage = localStorage.getItem(LS_CS_KEY);
+console.log(getContactsFromStorage);
 
 const contactsSlice = createSlice({
   name: 'contacts',
@@ -18,12 +21,12 @@ const contactsSlice = createSlice({
   reducers: {
     addContact(state, action) {
       const newState = [action.payload, ...state];
-      setInStorage(newState);
+      setContactsInStorage(newState);
       return newState;
     },
     deleteContact(state, action) {
       const newState = state.filter(contact => contact.name !== action.payload);
-      setInStorage(newState);
+      setContactsInStorage(newState);
       return newState;
     },
   },

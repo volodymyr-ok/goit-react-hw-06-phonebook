@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { StyledForm } from './Form.styled';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import contactsCheking from 'utils/contactsChecking';
 import { useSelector, useDispatch } from 'react-redux';
 import { getContacts } from 'redux/selectors';
 import { addContact } from 'redux/contactsSlice';
 
-export const Form = ({ addContactHandler }) => {
+// { addContactHandler }
+export const Form = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
 
@@ -28,7 +29,7 @@ export const Form = ({ addContactHandler }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    addContactHandler({ name, number });
+    // addContactHandler({ name, number });
 
     const inContactList = contacts.filter(contact =>
       contactsCheking(contact, { name, number })
@@ -78,6 +79,6 @@ export const Form = ({ addContactHandler }) => {
   );
 };
 
-Form.propTypes = {
-  addContactHandler: PropTypes.func.isRequired,
-};
+// Form.propTypes = {
+//   addContactHandler: PropTypes.func.isRequired,
+// };

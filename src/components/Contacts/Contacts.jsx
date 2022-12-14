@@ -1,20 +1,32 @@
+// import PropTypes from 'prop-types';
 import { ContactItem } from '../ContactItem/ContactItem';
 import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
 import { StyledUL } from './Contacts.styled';
+import { useSelector } from 'react-redux';
+import { getContacts, getFilter } from 'redux/selectors';
 
-export const Contacts = ({ contacts, onDelete }) => {
+// { contacts, onDelete }
+export const Contacts = () => {
+  const contacts = useSelector(getContacts);
+  const filterValue = useSelector(getFilter);
+
+  const filteredContacts = () => {
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filterValue)
+    );
+  };
+
   return (
     <>
-      {contacts.length !== 0 && (
+      {contacts.length && (
         <StyledUL>
-          {contacts.map(({ name, number }) => {
+          {filteredContacts().map(({ name, number }) => {
             return (
               <ContactItem
                 key={nanoid()}
                 name={name}
                 number={number}
-                onDelete={onDelete}
+                // onDelete={onDelete}
               />
             );
           })}
@@ -24,12 +36,12 @@ export const Contacts = ({ contacts, onDelete }) => {
   );
 };
 
-Contacts.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    }).isRequired
-  ),
-  onDelete: PropTypes.func.isRequired,
-};
+// Contacts.propTypes = {
+//   contacts: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       name: PropTypes.string.isRequired,
+//       number: PropTypes.string.isRequired,
+//     }).isRequired
+//   ),
+//   onDelete: PropTypes.func.isRequired,
+// };

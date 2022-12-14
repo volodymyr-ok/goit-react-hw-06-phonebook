@@ -1,7 +1,12 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { StyledLI } from './ContactItem.styled';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from 'redux/contactsSlice';
 
-export const ContactItem = ({ name, number, onDelete }) => {
+// onDelete
+export const ContactItem = ({ name, number }) => {
+  const dispatch = useDispatch();
+
   return (
     <StyledLI>
       <p>
@@ -9,15 +14,17 @@ export const ContactItem = ({ name, number, onDelete }) => {
         <span className="number">{number}</span>
       </p>
 
-      <button type="button" onClick={() => onDelete(name)}>
+      <button type="button" onClick={() => dispatch(deleteContact(name))}>
         Delete
       </button>
     </StyledLI>
   );
 };
 
-ContactItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
-};
+// onDelete(name);
+
+// ContactItem.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   number: PropTypes.string.isRequired,
+//   onDelete: PropTypes.func.isRequired,
+// };
